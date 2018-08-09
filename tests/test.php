@@ -10,9 +10,8 @@ require ("../vendor/autoload.php");
  * Time: 下午1:57
  */
 
-Factory::setInstruction(\Noob\Http\Request::class);
 
-var_dump(Factory::getInstance(\Noob\Http\Request::class));
+//var_dump(Factory::getInstance(\Noob\Http\Request::class));
 
 Factory::setInstruction(\Noob\Http\Request::class, function () {
     return (new \Noob\Http\Request);

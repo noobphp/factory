@@ -16,27 +16,24 @@ class Factory
     public static function getInstance($class_name)
     {
         if (! in_array($class_name, self::$object)) {
-            if (! in_array($class_name, self::$instruction)) {
-                if (is_callable(self::$instruction[$class_name])) {
-                    self::$object[$class_name] = (self::$instruction[$class_name])();
-                } else {
-                    self::$object[$class_name] = (new self::$instruction[$class_name]);
-                }
+            if (in_array($class_name, self::$instruction)) {
+                self::$object[$class_name] = (self::$instruction[$class_name])();
             } else {
-                return null;
+                self::$object[$class_name] = new $class_name;
             }
         }
         return self::$object[$class_name];
     }
 
-    public static function setInstruction($title, $content = '')
+    public static function setInstruction($title, $content)
     {
         if (is_callable($content)) {
             self::$instruction[$title] = $content;
         } else {
-            self::$instruction[$title] = function () use ($title) {
-              return new $title;
+            self::$instruction[$title] = function () use ($content) {
+              return new $content;
             };
         }
+        return;
     }
 }
