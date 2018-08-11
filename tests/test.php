@@ -16,5 +16,10 @@ require ("../vendor/autoload.php");
 Factory::setInstruction(\Noob\Http\Request::class, function () {
     return (new \Noob\Http\Request);
 });
-
 var_dump(Factory::getInstance(\Noob\Http\Request::class));
+
+Factory::setInstruction('request', \Noob\Http\Request::class);
+//Factory::setInstruction('request', function () {
+//    return (new \Noob\Http\Request);
+//});
+var_dump(Factory::getInstance('request'));
