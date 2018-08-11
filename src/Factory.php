@@ -15,8 +15,8 @@ class Factory
 
     public static function getInstance($class_name)
     {
-        if (! in_array($class_name, self::$object)) {
-            if (in_array($class_name, self::$instruction)) {
+        if (! isset(self::$object[$class_name])) {
+            if (isset(self::$instruction[$class_name])) {
                 self::$object[$class_name] = (self::$instruction[$class_name])();
             } else {
                 self::$object[$class_name] = new $class_name;
